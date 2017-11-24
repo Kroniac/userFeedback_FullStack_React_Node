@@ -1,22 +1,9 @@
 const express = require('express');
-const passport = require('passport');
-const googleStrategy = require('passport-google-oauth20').Strategy;
-const keys = require('./config/keys');
+require('./services/passport'); //as nothing is returned but only want to execute this file.So nothing to store in a variable
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
-
-passport.use(
-  new googleStrategy(
-    {
-      clientID: keys.googleClientId,
-      clientSecret: keys.googleClientSecret,
-      callbackURL: '/auth/google/callback'
-    },
-    accessToken => {
-      console.log(accessToken);
-    }
-  )
-);
+authRoutes(app);
 
 const PORT = process.env.PORT || 5000;
 
