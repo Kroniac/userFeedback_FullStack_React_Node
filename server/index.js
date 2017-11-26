@@ -1,9 +1,10 @@
 const express = require('express');
+require('./model/user');
 require('./services/passport'); //as nothing is returned but only want to execute this file.So nothing to store in a variable
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
 const authRoutes = require('./routes/authRoutes');
-require('./model/user');
+
 
 mongoose.connect(keys.mongoUri);
 
