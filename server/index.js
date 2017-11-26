@@ -3,6 +3,7 @@ require('./services/passport'); //as nothing is returned but only want to execut
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
 const authRoutes = require('./routes/authRoutes');
+require('./model/user');
 
 mongoose.connect(keys.mongoUri);
 
