@@ -1,11 +1,11 @@
 const express = require('express');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
-require('./model/user');
-require('./services/passport'); //as nothing is returned but only want to execute this file.So nothing to store in a variable
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
 const authRoutes = require('./routes/authRoutes');
+require('./model/user');
+require('./services/passport'); //as nothing is returned but only want to execute this file.So nothing to store in a variable
 
 //to connect to the mongoDb using URI saved in the keys object
 mongoose.connect(keys.mongoUri);
