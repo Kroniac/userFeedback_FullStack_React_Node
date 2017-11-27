@@ -17,6 +17,11 @@ passport.serializeUser((user, done) => {
   * thus eveything may not have googleId but have the mongo auto-generated unique Id*/
   done(null, user.id);
 });
+
+passport.deserializeUser((id, done) => {
+  users.findById(id).then(user => done(null, user));
+});
+
 //for getting google user info like its id and store in it mongodb
 passport.use(
   new googleStrategy(
