@@ -31,19 +31,17 @@ passport.use(
       callbackURL: '/auth/google/callback',
       proxy: true
     },
-    (accessToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
       //to find if the user with profle.id exist in mondodb or not
-      users.findOne({ googleId: profile.id }).then(existingUser => {
-        if (existingUser) {
-          //already have a record with this userID, no need to create a new one
-          done(null, existingUser); // to tell the passportjs that the user is there and it should resume the auth process
-        } else {
-          //no record with this userID, need to make a new one
-          new users({ googleId: profile.id })
-            .save() //to make and save recored with userID: existingUser
-            .then(user => done(null, user)); //to tell the passportjs that the user is created and it should resume the auth process
-        }
-      });
+      const existingUser = await users.findOne({ googleId: profile.id });
+
+      if (existingUser) {
+        //already have a record with this userID, no need to create a new one
+        return done(null, existingUser); // to tell the passportjs that the user is there and it should resume the auth process
+      }
+      //no record with this userID, need to make a new one
+      const user = await new users({ googleId: profile.id }).save(); //to make and save recored with userID: existingUser
+      done(null, user); //to tell the passportjs that the user is created and it should resume the auth process
     }
   )
 );
