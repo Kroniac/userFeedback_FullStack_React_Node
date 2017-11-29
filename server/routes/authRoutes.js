@@ -8,7 +8,13 @@ module.exports = app => {
     })
   );
 
-  app.get('/auth/google/callback', passport.authenticate('google'));
+  app.get(
+    '/auth/google/callback',
+    passport.authenticate('google'),
+    (req, res) => {
+      res.redirect('/surveys');
+    }
+  );
 
   /* req.logout() takes the cookie and kills the id in there, thus making the user no longer authenticated*/
   app.get('/api/logout', (req, res) => {
