@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import Header from './components/Header';
 import './App.css';
+import { connect } from 'react-redux';
+import * as actions from './store/actions/index';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.fetchUsers();
+  }
+
   render() {
     return (
       <div className="container">
@@ -13,4 +18,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(null, actions)(App);
