@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
+import Landing from './components/Landing';
 import './App.css';
 import { connect } from 'react-redux';
+import { BrowserRouter, Route } from 'react-router-dom';
 import * as actions from './store/actions/index';
 
 class App extends Component {
@@ -12,7 +14,12 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <Header />
+        <BrowserRouter>
+          <div>
+            <Header />
+            <Route exact path="/" component={Landing} />
+          </div>
+        </BrowserRouter>
       </div>
     );
   }

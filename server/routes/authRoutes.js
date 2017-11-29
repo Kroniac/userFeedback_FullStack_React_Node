@@ -19,7 +19,7 @@ module.exports = app => {
   /* req.logout() takes the cookie and kills the id in there, thus making the user no longer authenticated*/
   app.get('/api/logout', (req, res) => {
     req.logout();
-    res.send(req.user);
+    res.redirect('/');
   });
   app.get('/api/current_user', (req, res) => {
     res.send(req.user);

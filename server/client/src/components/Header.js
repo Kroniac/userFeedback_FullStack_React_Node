@@ -25,7 +25,7 @@ class Header extends Component {
     return (
       <nav>
         <div className="nav-wrapper">
-          <a>Emaily</a>
+          <a className="left brand-logo">Emaily</a>
           <ul id="nav-mobile" className="right ">
             {this.logged()}
           </ul>
