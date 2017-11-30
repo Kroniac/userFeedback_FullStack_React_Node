@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 class Header extends Component {
   logged() {
@@ -25,7 +25,12 @@ class Header extends Component {
     return (
       <nav>
         <div className="nav-wrapper">
-          <a className="left brand-logo">Emaily</a>
+          <Link
+            to={this.props.isAuthenticated ? '/surveys' : '/'}
+            className="left brand-logo"
+          >
+            Emaily
+          </Link>
           <ul id="nav-mobile" className="right ">
             {this.logged()}
           </ul>
