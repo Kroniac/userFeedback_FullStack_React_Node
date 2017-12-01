@@ -23,6 +23,8 @@ passport.deserializeUser((id, done) => {
 });
 
 //for getting google user info like its id and store in it mongodb
+console.log('GoogleClient: ', keys.googleClientId)
+console.log('GoogleSecret: ', keys.googleClientSecret)
 passport.use(
   new googleStrategy(
     {
