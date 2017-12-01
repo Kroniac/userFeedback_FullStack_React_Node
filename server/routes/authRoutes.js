@@ -12,6 +12,7 @@ module.exports = app => {
     '/auth/google/callback',
     passport.authenticate('google'),
     (req, res) => {
+      console.log('log from server side: ', req.user);
       res.redirect('/surveys');
     }
   );
