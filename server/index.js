@@ -35,8 +35,7 @@ billingRoutes(app); //for handling routes related to billing
 if (process.env.NODE_ENV === 'production') {
   //express will serve up production assets
   // like main.js file, main.css file
-  app.use(express.static('client/build'));
-
+  app.use(express.static(path.join(__dirname, 'client/build')));
   //express will serve up the index.html file
   // if it doesn't recognize the route
   const path = require('path');
