@@ -5,6 +5,7 @@ import StripePayment from './StripePayment';
 
 class Header extends Component {
   logged() {
+    console.log(this.props.isAuthenticated)
     switch (this.props.isAuthenticated) {
       case null:
         return;
