@@ -1,11 +1,14 @@
 const keys = require('../config/keys');
 const stripe = require('stripe')(keys.stripeSecretey);
+const checkLogin = require('../middlewares/requireLogin');
 
 module.exports = app => {
-  app.post('/api/stripe', async (req, res) => {
-    
-    if(!req.user){
-        return res.status(401).send({error: 'must be Logged In for this reques'})
+  /* checkLogin - middleware to check the user is logged or not. if,yes then process the request*/
+  app.post('/api/stripe', checkLogin, async (req, res) => {
+    if (!req.user) {
+      return res
+        .status(401)
+        .send({ error: 'must be Logged In for this reques' });
     }
     //to build the credit card
     const charge = await stripe.charges.create({
