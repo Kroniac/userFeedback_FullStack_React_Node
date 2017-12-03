@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const authRoutes = require('./routes/authRoutes');
 const billingRoutes = require('./routes/billingRoutes');
 require('./model/user');
+require('./model/surveys');
 require('./services/passport'); //as nothing is returned but only want to execute this file.So nothing to store in a variable
 
 //to connect to the mongoDb using URI saved in the keys object
