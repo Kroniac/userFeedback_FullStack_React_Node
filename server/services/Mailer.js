@@ -19,7 +19,10 @@ class Mailer extends helper.Mail {
     //helper function from extended class mail to add mail's body
     this.addContent(this.body);
 
+    //to track user click on each mail for sendGrid to set it's own special link to the mails
     this.addClickTracking();
+
+    this.addRecipients();
   }
 
   //to return email of the recipients from the recipients sub-document
@@ -35,6 +38,15 @@ class Mailer extends helper.Mail {
 
     trackingSettings.setClickTracking(clickSetting);
     this.addTrackingSettings(trackingSettings);
+  }
+
+  addRecipients() {
+    const personalize = new helper.Personalization();
+
+    this.recipients.forEach(recipient => {
+      personalize.addTo(recipient);
+    });
+    this.addPersonalization(personalize);
   }
 }
 
