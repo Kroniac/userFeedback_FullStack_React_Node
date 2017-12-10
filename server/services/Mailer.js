@@ -2,6 +2,7 @@ const sendGrid = require('sendgrid');
 const helper = sendGrid.helper;
 const keys = require('../config/keys');
 
+//sendGrid Mailer setup
 class Mailer extends helper.Mail {
   constructor({ subject, recipients }, content) {
     super();
@@ -14,6 +15,11 @@ class Mailer extends helper.Mail {
     this.subject = subject;
     this.body = new helper.Content('text/html', content);
     this.recipients = this.formatAddresses(recipients);
+
+    //helper function from extended class mail to add mail's body
+    this.addContent(this.body);
+
+    this.addClickTracking();
   }
 
   //to return email of the recipients from the recipients sub-document
@@ -21,6 +27,14 @@ class Mailer extends helper.Mail {
     return recipients.map(({ email }) => {
       return new helper.Email(email);
     });
+  }
+
+  addClickTracking() {
+    const trackingSettings = new helper.TrackingSettings();
+    const clickSetting = new helper.ClickTracking(true, true);
+
+    trackingSettings.setClickTracking(clickSetting);
+    this.addTrackingSettings(trackingSettings);
   }
 }
 
